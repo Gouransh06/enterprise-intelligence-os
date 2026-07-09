@@ -14,4 +14,28 @@ services:
     env_file:
       - ./backend/.env
 
+    depends_on:
+      - postgres
+
     restart: unless-stopped
+
+  postgres:
+    image: postgres:16
+
+    container_name: eios-postgres
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: eios
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
