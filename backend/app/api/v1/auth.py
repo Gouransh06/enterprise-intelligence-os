@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+import traceback
 
 from app.auth.service import AuthService
 from app.database.session import get_db
@@ -26,8 +27,9 @@ def register(
     try:
         return auth_service.register(db, user)
 
-    except ValueError as e:
+    except Exception as e:
+        traceback.print_exc()
         raise HTTPException(
-            status_code=400,
+            status_code=500,
             detail=str(e),
         )

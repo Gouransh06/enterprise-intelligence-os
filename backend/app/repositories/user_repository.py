@@ -29,3 +29,13 @@ class UserRepository:
         db.refresh(user)
 
         return user
+    
+def get_by_username(
+    self,
+    db: Session,
+    username: str,
+) -> User | None:
+
+    stmt = select(User).where(User.username == username)
+
+    return db.scalar(stmt)
