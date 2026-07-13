@@ -16,6 +16,26 @@ class UserRepository:
 
         return db.scalar(stmt)
 
+    def get_by_username(
+        self,
+        db: Session,
+        username: str,
+    ) -> User | None:
+
+        stmt = select(User).where(User.username == username)
+
+        return db.scalar(stmt)
+
+    def get_by_id(
+        self,
+        db: Session,
+        user_id: int,
+    ) -> User | None:
+
+        stmt = select(User).where(User.id == user_id)
+
+        return db.scalar(stmt)
+
     def create(
         self,
         db: Session,
@@ -23,19 +43,7 @@ class UserRepository:
     ) -> User:
 
         db.add(user)
-
         db.commit()
-
         db.refresh(user)
 
         return user
-    
-def get_by_username(
-    self,
-    db: Session,
-    username: str,
-) -> User | None:
-
-    stmt = select(User).where(User.username == username)
-
-    return db.scalar(stmt)
