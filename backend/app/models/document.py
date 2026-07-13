@@ -51,6 +51,6 @@ class Document(Base):
     )
 
     owner = relationship(
-    "User",
-    back_populates="documents",
+        "User",
+        back_populates="documents",
     )
