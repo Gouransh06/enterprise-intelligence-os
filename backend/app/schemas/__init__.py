@@ -1,0 +1,9 @@
+from app.schemas.document import (
+    DocumentListResponse,
+    DocumentResponse,
+)
+
+__all__ = [
+    "DocumentResponse",
+    "DocumentListResponse",
+]
